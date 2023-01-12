@@ -1,4 +1,4 @@
-package com.nativeapp.newarchitecture;
+package com.euphoriaCosmetics.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.nativeapp.BuildConfig;
-import com.nativeapp.newarchitecture.components.MainComponentsRegistry;
-import com.nativeapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.euphoriaCosmetics.BuildConfig;
+import com.euphoriaCosmetics.newarchitecture.components.MainComponentsRegistry;
+import com.euphoriaCosmetics.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

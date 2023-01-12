@@ -35,7 +35,7 @@ import {SignUp, SignIn} from '../screens/SignupSignin';
 import {AddressForm} from './Form';
 import {LikedShadesScreen} from '../screens/LikedShadesScreen';
 import DeviceContextProvider from '../store/context/device-context';
-import {FunctionalityInProgress} from '../screens/Rough';
+import {CameraScreenMain} from '../screens/Rough';
 import RecentsContextProvider from '../store/context/recents-context';
 
 const Tab = createBottomTabNavigator();
@@ -117,7 +117,7 @@ function MyTabs() {
       /> */}
       <Tab.Screen
         name="Camera"
-        component={FunctionalityInProgress}
+        component={CameraScreenMain}
         options={{
           tabBarLabel: 'Camera',
           // tabBarIcon: ({color, size}) => (
@@ -198,7 +198,7 @@ function ScreenStack() {
       />
       <Stack.Screen
         name="FunctionalityInProgress"
-        component={FunctionalityInProgress}
+        component={CameraScreenMain}
         options={{
           header: props => (
             <Header name="VISIT OUR WEBSITE" isArrow={true} {...props} />
