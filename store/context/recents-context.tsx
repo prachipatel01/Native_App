@@ -16,7 +16,7 @@ const _getToken = () => {
 };
 
 const getRecents = token => {
-  fetch('http://10.0.2.2:3000/api/v1/shade/recents', {
+  fetch('http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/recents', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ function RecentsContextProvider({children}) {
   };
 
   const getRecentShades = () => {
-    fetch('http://10.0.2.2:3000/api/v1/shade/recents', {
+    fetch('http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/recents', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function RecentsContextProvider({children}) {
   };
 
   const addRecents = (token, shade) => {
-    fetch('http://10.0.2.2:3000/api/v1/shade/recents', {
+    fetch('http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/recents', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -31,7 +31,7 @@ export class AddressScreen extends React.Component {
 
   getAddress = () => {
     fetch(
-      'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/user/Addresses',
+      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/user/Addresses',
       {
         method: 'GET',
         headers: {
@@ -96,7 +96,7 @@ export class AddressScreen extends React.Component {
 
   onRemoveAddress = AddressId => {
     fetch(
-      'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/user/Addresses',
+      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/user/Addresses',
       {
         method: 'DELETE',
         headers: {
@@ -121,7 +121,7 @@ export class AddressScreen extends React.Component {
 
   onChangeDefaultAddress = AddressId => {
     fetch(
-      'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/user/Address/changeDefault',
+      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/user/Address/changeDefault',
       {
         method: 'PATCH',
         headers: {

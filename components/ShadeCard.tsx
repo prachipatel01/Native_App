@@ -84,7 +84,7 @@ export function ShadeCard({navigation, shade, token, isLiked = false}) {
   const [liked, setLiked] = useState(isLiked);
 
   const addToCart = shadeName => {
-    fetch('http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/shade/myCart', {
+    fetch('http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/myCart', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export function ShadeCard({navigation, shade, token, isLiked = false}) {
   };
 
   const likeShade = shadeId => {
-    fetch('http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/shade/liked', {
+    fetch('http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/liked', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ export function ShadeCard({navigation, shade, token, isLiked = false}) {
   };
 
   const dislikeShade = shadeId => {
-    fetch('http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/shade/liked', {
+    fetch('http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/liked', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

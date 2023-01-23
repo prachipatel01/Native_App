@@ -16,7 +16,7 @@ export function AddressForm({route, navigation}) {
   const saveAddress = () => {
     if (fun == 'save') {
       fetch(
-        'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/user/Addresses',
+        'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/user/Addresses',
         {
           method: 'POST',
           headers: {
@@ -46,7 +46,7 @@ export function AddressForm({route, navigation}) {
         });
     } else if (fun == 'edit') {
       fetch(
-        'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/user/Addresses',
+        'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/user/Addresses',
         {
           method: 'PATCH',
           headers: {

@@ -8,7 +8,7 @@ import {GoldButton, GoldGradientText} from './Gradient';
 export default function ShopCartridge({navigation, cartridges, token}) {
   const addCartridgeToCart = cartridgeName => {
     fetch(
-      'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/cartridge/myCart',
+      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/cartridge/myCart',
       {
         method: 'POST',
         headers: {

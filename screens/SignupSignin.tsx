@@ -39,7 +39,7 @@ export function SignUp({navigation}) {
         return;
       } else {
         fetch(
-          'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/signup',
+          'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/signup',
           {
             method: 'POST',
             headers: {
@@ -193,7 +193,7 @@ export function SignIn({navigation}) {
       return;
     } else {
       fetch(
-        'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/signin',
+        'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/signin',
         {
           method: 'POST',
           headers: {
@@ -270,6 +270,7 @@ export function SignIn({navigation}) {
           <Pressable
             style={styles.inputSubmit}
             onPress={() => {
+              console.log('Signin pressed!')
               sendToBackend();
             }}>
             <Text style={styles.CinzelBlack}>SIGN IN</Text>

@@ -9,7 +9,7 @@ export function ShadesFromBase({route, navigation}) {
 
   useEffect(() => {
     fetch(
-      'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/shade/shades/' +
+      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/shades/' +
         baseShade.shadeName,
       {
         method: 'GET',

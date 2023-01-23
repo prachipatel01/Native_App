@@ -54,7 +54,7 @@ export class MyCartScreen extends React.Component {
 
   getAddress = () => {
     fetch(
-      'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/user/Addresses',
+      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/user/Addresses',
       {
         method: 'GET',
         headers: {
@@ -85,7 +85,7 @@ export class MyCartScreen extends React.Component {
 
   getMyCart = () => {
     fetch(
-      'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/user/myCart',
+      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/user/myCart',
       {
         method: 'GET',
         headers: {
@@ -122,7 +122,7 @@ export class MyCartScreen extends React.Component {
   removeShade = shadeId => {
     this.setState({renderTotal: false});
     fetch(
-      'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/shade/myCart',
+      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/myCart',
       {
         method: 'DELETE',
         headers: {
@@ -148,7 +148,7 @@ export class MyCartScreen extends React.Component {
   removeCartridge = cartridgeId => {
     this.setState({renderTotal: false});
     fetch(
-      'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/cartridge/myCart',
+      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/cartridge/myCart',
       {
         method: 'DELETE',
         headers: {

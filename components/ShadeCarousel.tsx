@@ -60,7 +60,7 @@ export function ShadeCarousel({navigation, token}) {
   const [carouselShades, setCarouselShades] = React.useState();
 
   React.useEffect(() => {
-    fetch('http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/shade/shadesWithModel', {
+    fetch('http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/shadesWithModel', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

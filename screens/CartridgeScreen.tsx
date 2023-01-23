@@ -20,7 +20,7 @@ export class CartridgeScreen extends React.Component {
       ])
       .then(() => {
         fetch(
-          'http://ec2-3-87-206-233.compute-1.amazonaws.com:3000/api/v1/cartridge',
+          'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/cartridge',
           {
             method: 'GET',
             headers: {
