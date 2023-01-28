@@ -5,6 +5,7 @@ import {ShadeColor} from '../components/cartComponents';
 import {styles, dimensions, colors} from '../CSS';
 import {GoldButton, GoldGradientText} from '../components/Gradient';
 import LinearGradient from 'react-native-linear-gradient';
+import {ShadesContext} from '../store/context/shades-context';
 
 function Button({text, onPress}) {
   return (
@@ -21,27 +22,23 @@ function Button({text, onPress}) {
 export function AfterShadeIsCreated({route, navigation}) {
   const {shade, token, getShades} = route.params;
 
+  const shadesContext = useContext(ShadesContext);
   const addShadeToFavourites = () => {
-    fetch(
-      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/favourites',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token,
-        },
-        body: JSON.stringify({shadeId: shade._id}),
-      },
-    )
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          alert('Error while fetching data, please signin again');
-          navigation.navigate('SignIn');
-        } else {
-          getShades();
-        }
-      });
+    shadesContext.getToken();
+    if(shadesContext.token){
+      shadesContext.addFavouriteShades(shadesContext.token, shade);
+      shadesContext.getFavouriteShades(token);
+      if(shadesContext.error){
+        alert(shadesContext.error);
+        navigation.navigate('SignIn');
+      } else {
+        alert(`shade ${shade.shadeName} has been added to the closet!`)
+        navigation.navigate('AfterShadeIsCreated', {
+          shade: shade,
+          token: shadesContext.token,
+        });
+      }
+    }
   };
 
   const onPressCreate = () => {
@@ -82,30 +79,22 @@ export function AfterShadeIsCreated({route, navigation}) {
 }
 
 function CreateShadeContainer({navigation, token, shade}) {
+  const shadesContext = useContext(ShadesContext);
   const addShadeToRecents = () => {
-    fetch(
-      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/recents',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token,
-        },
-        body: JSON.stringify({shadeId: shade._id}),
-      },
-    )
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          alert('Error while fetching data, please signin again');
-          navigation.navigate('SignIn');
-        } else {
-          navigation.navigate('AfterShadeIsCreated', {
-            shade: shade,
-            token: token,
-          });
-        }
-      });
+    shadesContext.getToken();
+    if(shadesContext.token){
+      shadesContext.addRecentShades(shadesContext.token, shade);
+      shadesContext.getRecentShades(token);
+      if(shadesContext.error){
+        alert(shadesContext.error);
+        navigation.navigate('SignIn');
+      } else {
+        navigation.navigate('AfterShadeIsCreated', {
+          shade: shade,
+          token: shadesContext.token,
+        });
+      }
+    }
   };
 
   return (
@@ -151,7 +140,7 @@ function CreateShadeContainer({navigation, token, shade}) {
 export function CreateShadeScreen({route, navigation}) {
   const {shade, token} = route.params;
   return (
-    <SafeAreaView style={styles.body}>
+    <SafeAreaView style={[styles.body, {top:0, bottom: 0, position: 'absolute'}]}>
       <ScrollView contentContainerStyle={CreateShadeScreenStyle.outerContainer}>
         <View style={CreateShadeScreenStyle.image}>
           <Image
@@ -204,12 +193,12 @@ export const CreateShadeScreenStyle = StyleSheet.create({
     paddingBottom: 20,
   },
   outerContainer: {
-    alignItems: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
+
   },
   createShadeContainer: {
-    // alignItems: 'center',
     padding: 20,
-    // backgroundColor: colors.grey,
     width: dimensions.fullWidth - 25,
     margin: 10,
   },

@@ -1,33 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {View, Image, FlatList, SafeAreaView} from 'react-native';
 import {StyleSheet} from 'react-native';
 // import {cartridges} from '../assets/cartridge';
 import {colors, dimensions, styles} from '../CSS';
+import { CartridgesContext } from '../store/context/cartridges-context';
 import {GoldButton, GoldGradientText} from './Gradient';
 
 export default function ShopCartridge({navigation, cartridges, token}) {
-  const addCartridgeToCart = cartridgeName => {
-    fetch(
-      'http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/cartridge/myCart',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token,
-        },
-        body: JSON.stringify({cartridge: cartridgeName}),
-      },
-    )
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        if (data.error) {
-          alert('Error while fetching data, please signin again');
-          navigation.navigate('SignIn');
-        } else {
-          alert(`${cartridgeName} is added to your cart`);
-        }
-      });
+
+  const cartridgesContext = useContext(CartridgesContext);
+
+  const addCartridgeToCart = cartridge => {
+    cartridgesContext.getToken();
+    cartridgesContext.addCartridgeToCart(cartridgesContext.token, cartridge);
   };
 
   return (
@@ -65,7 +50,7 @@ export default function ShopCartridge({navigation, cartridges, token}) {
               textStyle={ShopCartridgeStyle.buttonText}
               buttonStyle={ShopCartridgeStyle.button}
               onPress={() => {
-                addCartridgeToCart(item.cartridgeShadeName);
+                addCartridgeToCart(item);
               }}
             />
             {/* <GoldGradient component={Button} style={{margin: 5, maxWidth: 250}}></GoldGradient> */}

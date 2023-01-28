@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet, View, Image, Pressable} from 'react-native';
 import {colors, dimensions, styles} from '../CSS';
+import { ShadesContext } from '../store/context/shades-context';
 import {GoldGradientText, GoldButton} from './Gradient';
 
 function Price({shade}) {
@@ -81,67 +82,23 @@ export function ShadeCard({navigation, shade, token, isLiked = false}) {
   const backgroundColor = {
     backgroundColor: shade.colorCode,
   };
+  const shadesContext = useContext(ShadesContext);
   const [liked, setLiked] = useState(isLiked);
 
-  const addToCart = shadeName => {
-    fetch('http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/myCart', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token,
-      },
-      body: JSON.stringify({shade: shadeName}),
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        if (data.error) {
-          alert('Error while fetching data, please signin again');
-          navigation.navigate('SignIn');
-        } else {
-          alert(`${shadeName} is added to your cart`);
-        }
-      });
+  const addToCart = shade => {
+    shadesContext.addShadeToCart(token, shade);
   };
 
-  const likeShade = shadeId => {
-    fetch('http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/liked', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token,
-      },
-      body: JSON.stringify({shadeId: shadeId}),
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          alert('Error while fetching data, please signin again');
-          navigation.navigate('SignIn');
-        } else {
-          setLiked(true);
-        }
-      });
+  const likeShade = shade => {
+    shadesContext.addLikedShade(token, shade);
+    shadesContext.getLikedShades(token);
+    setLiked(true);
   };
 
-  const dislikeShade = shadeId => {
-    fetch('http://ec2-52-91-34-18.compute-1.amazonaws.com/api/v1/shade/liked', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token,
-      },
-      body: JSON.stringify({shadeId: shadeId}),
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          alert('Error while fetching data, please signin again');
-          navigation.navigate('SignIn');
-        } else {
-          setLiked(false);
-        }
-      });
+  const dislikeShade = shade => {
+    shadesContext.removeLikedShade(token, shade);
+    shadesContext.getLikedShades(token);
+    setLiked(false);
   };
 
   return (
@@ -163,7 +120,7 @@ export function ShadeCard({navigation, shade, token, isLiked = false}) {
         {liked ? (
           <Pressable
             onPress={() => {
-              dislikeShade(shade._id);
+              dislikeShade(shade);
             }}>
             <Image
               source={require('../assets/icons/heart.png')}
@@ -173,7 +130,7 @@ export function ShadeCard({navigation, shade, token, isLiked = false}) {
         ) : (
           <Pressable
             onPress={() => {
-              likeShade(shade._id);
+              likeShade(shade);
             }}>
             <Image source={require('../assets/icons/disabledLike.png')} />
           </Pressable>
@@ -197,7 +154,7 @@ export function ShadeCard({navigation, shade, token, isLiked = false}) {
             buttonStyle={ShadeCardStyle.buttonStyle}
             onPress={() => {
               // navigation.navigate('MyCartScreen')
-              addToCart(shade.shadeName);
+              addToCart(shade);
             }}
           />
         )}

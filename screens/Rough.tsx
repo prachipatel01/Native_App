@@ -7,6 +7,8 @@ import {
   Platform,
 } from 'react-native';
 import {CameraScreen} from 'react-native-camera-kit';
+import { GoldGradientText } from '../components/Gradient';
+import { dimensions, styles } from '../CSS';
 
 export const CameraScreenMain = () => {
   const [isPermitted, setIsPermitted] = useState(false);
@@ -140,3 +142,13 @@ export const CameraScreenMain = () => {
     </SafeAreaView>
   );
 };
+
+export const FunctionalityInProgress = ({navigation}) => {
+  return (
+    <View style={[styles.body, {height: dimensions.fullHeight - 100, justifyContent: 'center', alignItems: 'center'}]}>
+      <GoldGradientText textStyle={styles.CinzelGold}>
+        This Functionality is in progress!
+      </GoldGradientText>
+    </View>
+  )
+}

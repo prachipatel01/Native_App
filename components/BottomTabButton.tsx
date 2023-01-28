@@ -35,8 +35,12 @@ import {SignUp, SignIn} from '../screens/SignupSignin';
 import {AddressForm} from './Form';
 import {LikedShadesScreen} from '../screens/LikedShadesScreen';
 import DeviceContextProvider from '../store/context/device-context';
-import {CameraScreenMain} from '../screens/Rough';
-import RecentsContextProvider from '../store/context/recents-context';
+import {FunctionalityInProgress} from '../screens/Rough';
+import ShadesContextProvider from '../store/context/shades-context';
+import TokenContextProvider from '../store/context/token-context';
+import CartridgeContextProvider from '../store/context/cartridges-context';
+import OrderContextProvider from '../store/context/orders-context';
+import AddressContextProvider from '../store/context/address-context';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -117,7 +121,7 @@ function MyTabs() {
       /> */}
       <Tab.Screen
         name="Camera"
-        component={CameraScreenMain}
+        component={FunctionalityInProgress}
         options={{
           tabBarLabel: 'Camera',
           // tabBarIcon: ({color, size}) => (
@@ -198,7 +202,7 @@ function ScreenStack() {
       />
       <Stack.Screen
         name="FunctionalityInProgress"
-        component={CameraScreenMain}
+        component={FunctionalityInProgress}
         options={{
           header: props => (
             <Header name="VISIT OUR WEBSITE" isArrow={true} {...props} />
@@ -388,11 +392,21 @@ function ScreenStack() {
 
 export default function DefaultScreen() {
   return (
-    <DeviceContextProvider>
-      <NavigationContainer>
-        {/* <MyTabs />  */}
-        <ScreenStack />
-      </NavigationContainer>
-    </DeviceContextProvider>
+    <TokenContextProvider>
+      <DeviceContextProvider>
+        <ShadesContextProvider>
+          <CartridgeContextProvider>
+            <AddressContextProvider>
+              <OrderContextProvider>
+                <NavigationContainer>
+                  {/* <MyTabs />  */}
+                  <ScreenStack />
+                </NavigationContainer>
+              </OrderContextProvider>
+            </AddressContextProvider>
+          </CartridgeContextProvider>
+        </ShadesContextProvider>
+      </DeviceContextProvider>
+    </TokenContextProvider>
   );
 }

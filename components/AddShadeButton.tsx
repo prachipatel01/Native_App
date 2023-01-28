@@ -49,13 +49,10 @@ export default function AddShade({navigation, shade, token}) {
 
 export const AddShadeStyle = StyleSheet.create({
   container: {
-    justifyContent: 'center',
     alignItems: 'center',
-    // padding: 2,
+    width: 60,
+    height: 100,
   },
-  button: {
-    // justifyContent: 'center',
-    // alignItems: 'center',
-  },
+  button: {},
   buttonText: {},
 });
